@@ -6,7 +6,7 @@ twig:
         locale: "%locale%"
         version: "%version%"
         title: "%title%"
-        mercure_url: '%mercure_url%'
+        mercure_url: '%env(VITE_MERCURE_URL)%'
         appService: '@App\Service\ApplicationSettingsService'
 
 when@test:
