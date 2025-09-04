@@ -1,3 +1,6 @@
+<script>
+    const VITE_MERCURE_URL = '{{ vite_mercure_url }}';
+</script>
 {%- extends 'skeleton.html.twig' -%}
 
 {% block body_attrs %}data-mercure-url="{{ vite_mercure_url }}"{% endblock %}
