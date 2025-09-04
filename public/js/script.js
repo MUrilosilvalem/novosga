@@ -3,6 +3,14 @@
  * @author Rogerio Lino <rogeriolino@gmail.com>
  */
 
+connect(topics) {
+    console.log("Mercure URL:", VITE_MERCURE_URL);
+    this.url = new URL(VITE_MERCURE_URL);
+    for (let topic of topics) {
+        this.url.searchParams.append('topic', topic);
+    }
+    return new EventSource(this.url);
+}
 const errorModal = new bootstrap.Modal('#error-modal');
 
 const App = {
