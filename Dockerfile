@@ -50,3 +50,10 @@ COPY --from=composer --chown=65534:65534 /var/www/html/vendor /var/www/html/vend
 COPY --from=composer --chown=65534:65534 /var/www/html/.env.local.php /var/www/html/.env.local.php
 COPY --from=composer --chown=65534:65534 /var/www/html/public/bundles /var/www/html/public/bundles
 COPY --from=cert --chown=65534:65534 /jwt /var/www/html/config/jwt
+
+RUN set -xe \
+    && echo "APP_BUILD_NUMBER=$GIT_COMMIT" >> .env.local \
+    && echo "VITE_MERCURE_URL=https://mercure-proxy.evolution-lab-novosgachagas.jxj99o.easypanel.host/.well-known/mercure" >> .env.local \
+    && php composer.phar install --no-dev --optimize-autoloader \
+    && php composer.phar dump-autoload --no-dev --classmap-authoritative \
+    && php composer.phar dump-env prod
